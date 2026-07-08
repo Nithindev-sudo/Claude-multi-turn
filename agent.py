@@ -8,7 +8,7 @@ print(load_dotenv())
 message = client.messages.create(
     
         model=model,
-        max_tokens=1000,
+        max_tokens=999,
         messages = [
             {
                 "role" : "user",
