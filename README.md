@@ -49,6 +49,8 @@ This repository will gradually evolve into a fully functional multi-turn AI agen
 
 The goal of this project is not just to build an AI chatbot, but to understand how modern AI agents work internally—from simple API calls to persistent conversations, tool use, and intelligent workflows.
 
+this line of code is written by a girl anonymously
+
 Each commit will represent a new learning milestone, making it easy to follow the project's evolution over time.
 
 ---
