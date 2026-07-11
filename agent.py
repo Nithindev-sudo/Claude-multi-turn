@@ -4,7 +4,6 @@ from anthropic import Anthropic
 
 client = Anthropic()
 model="claude-sonnet-4-6"
-print(load_dotenv())
 message = client.messages.create(
     
         model=model,
