@@ -4,23 +4,7 @@ from anthropic import Anthropic
 
 client = Anthropic()
 model="claude-sonnet-4-6"
-<<<<<<< HEAD
 print(load_dotenv())
-=======
-message = client.messages.create(
-    
-        model=model,
-        max_tokens=999,
-        messages = [
-            {
-                "role" : "user",
-                "content" : "Hi can you tell me what is meant by an MCP or controller in claude terms? give answer in one sentence"
-            }
-        ]
-    
-)
->>>>>>> 590c8f5d7c675a24cba6a60894a1f0f27112f498
-
 
 #making an initial message list with empty messages
 messages = []
