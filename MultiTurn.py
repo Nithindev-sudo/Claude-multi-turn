@@ -15,13 +15,50 @@ def add_assistant_message(messages,text):
     messages.append(assistant_message)
 
 
+# Using system prompt for setting tone and behaviour of model.
+system_prmopt="""you are a helpful assistant that donot  answers maths questionsdirectly but .
+ You will guide the students to solve the questions in simple way.
+ """
+
+
 def chat(messages):
     message = client.messages.create(
         model=model,
         max_tokens=1000,
+        system=system_prmopt,
         messages=messages
     )
     return message.content[0].text 
+
+
+## In this function we are not using harcoded system prompt instead we put the parameters that 
+## are passed for the model into a params dictionary and then we pass the params dictionary to the model call.
+## this is done because when a system param is passed to the model call then everytime it should have some value
+## if the model is called without providing a system value call it will throw an error as System="" empty
+#  so to handle this we are using a params dictionary and passing the system value to the model call only
+#  if it is provided in the params dictionary.
+# and then call the model using params dictionary instead of harcoding the system value in the model call. 
+params={
+    "model":model,
+    "max_tokens":1000,
+    "messages":messages
+}
+
+if system_prmopt:
+    params["system"]=system_prmopt
+
+
+def chat1(messages):
+    message = client.messages.create(
+        # model=model,
+        # max_tokens=1000,
+        # system=system_prmopt,
+        # messages=messages
+        **params
+    )
+    return message.content[0].text 
+
+
 
 
 ### MAIN  CODE FOR CHAT BOT REPLICATION in terminal or command prompt.##
@@ -34,7 +71,7 @@ while True:
         continue
 
     add_user_message(messages, user_input)
-    answer = chat(messages)
+    answer = chat1(messages)
     add_assistant_message(messages, answer)
     print(answer)
 
