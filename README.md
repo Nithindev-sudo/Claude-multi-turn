@@ -330,3 +330,6 @@ Each commit represents a new learning milestone, making it easy to follow the pr
 ---
 
 > **Current Milestone:** The project now supports **context-aware conversations**, **dynamic system prompts**, **temperature-controlled responses**, and **real-time event streaming**. The next phase focuses on **prompt evaluation**, **grading strategies**, and **tool use**, laying the foundation for building production-ready AI agents.
+
+
+##bk dt commit 3 
