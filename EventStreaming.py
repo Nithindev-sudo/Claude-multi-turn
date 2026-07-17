@@ -97,3 +97,5 @@ with client.messages.stream(
 ##now we store the entire stream of chunks into a full final message 
 ## and ues the ffinal message to store inany db or somewherer
 answer = stream.get_final_message()
+
+##trying bk dt commit
