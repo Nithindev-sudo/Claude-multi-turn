@@ -1,50 +1,46 @@
 # Claude Multi-Turn Conversation Agent
 
-
-Hi I'm Nithin
-This repository documents my journey of building a **multi-turn conversational AI agent** using the **Anthropic Claude API**.
-
-## 🚀 Current Progress (Step 3)
-
-The project has evolved from a simple API integration into a **context-aware conversational AI agent** with configurable model behavior and real-time response streaming.
-..
-### ✅ Implemented
-
-- Connected to the Anthropic Claude API.
-- Loaded the API key securely using a `.env` file.
-- Sent user messages to Claude.
-- Received and displayed Claude's responses.
-- Created reusable helper functions for managing messages.
-- Implemented conversation history storage.
-- Enabled context-aware multi-turn conversations.
-- Built a terminal-based interactive chatbot.
-- Added support for **System Prompts** to customize the assistant's behavior.
-- Added configurable **Temperature** to control response creativity.
-- Refactored API calls using a flexible parameter dictionary.
-- Implemented **Event Streaming** for real-time response generation.
-- Captured the complete streamed response for future storage or processing.
-- Established the foundation for building advanced AI agents.
+This repository documents my journey of building a **multi-turn conversational AI agent** using the **Anthropic Claude API**. Starting from basic API integration, the project gradually evolves into a production-style AI agent by implementing conversation memory, prompt engineering, streaming responses, evaluation workflows, and tool use.
 
 ---
 
-## 📂 Current Project Structure
+# 🚀 Current Progress (Step 3)
+
+The project has evolved beyond simple request-response interactions into a **context-aware conversational AI agent** with configurable model behavior and real-time streaming.
+
+## ✅ Implemented
+
+- Connected to the Anthropic Claude API.
+- Loaded API credentials securely using `.env`.
+- Built reusable helper functions for message management.
+- Implemented conversation history for multi-turn interactions.
+- Created an interactive terminal chatbot.
+- Added configurable **System Prompts**.
+- Added configurable **Temperature** settings.
+- Refactored API calls using dynamic parameter dictionaries.
+- Implemented **Event Streaming** using the Anthropic SDK.
+- Captured streamed responses for future storage or processing.
+
+---
+
+# 📂 Current Project Structure
 
 ```text
 .
 ├── .github
 │   └── workflows
 │       └── claude.yml
-├── agent.py              # Basic Anthropic API integration
-├── MultiTurn.py          # Multi-turn chatbot with system prompts & temperature
-├── EventStreaming.py     # Real-time streaming responses using Anthropic SDK
-├── .env                  # Stores the Anthropic API key (not committed)
+├── agent.py
+├── MultiTurn.py
+├── EventStreaming.py
+├── .env
 ├── .gitignore
 └── README.md
 ```
 
 ---
 
-## 🛠 Technologies Used
+# 🛠 Technologies Used
 
 - Python
 - Anthropic Python SDK
@@ -52,159 +48,285 @@ The project has evolved from a simple API integration into a **context-aware con
 
 ---
 
-# 🔍 What Has Been Built So Far
+# 📖 Project Modules
 
-## 1️⃣ agent.py
+## 📌 agent.py
 
-Introduces the fundamentals of working with the Anthropic Messages API.
+Introduces the basics of working with the Anthropic Messages API.
 
-Features:
+### Features
 
 - API authentication
 - Sending prompts
 - Receiving responses
-- Helper functions for messages
-- Conversation history management
-
-This file explains how Claude remembers previous interactions by sending the complete conversation history with every request.
+- Conversation history
+- Multi-turn context
 
 ---
 
-## 2️⃣ MultiTurn.py
+## 💬 MultiTurn.py
 
 Implements an interactive terminal chatbot.
 
 ### Features
 
-- Infinite chat loop
+- Continuous chat loop
 - Conversation memory
-- Context-aware responses
-- Empty input validation
-- Reusable helper functions
+- Input validation
+- Dynamic system prompts
+- Configurable temperature
+- Reusable chat functions
 
-### System Prompt Support
-
-The chatbot can now control Claude's behavior using a **system prompt**.
-
-Example:
+### System Prompt Example
 
 ```python
 system_prompt="You are a director of big movies giving advice."
 ```
 
-Instead of hardcoding the system prompt, the project dynamically adds it only when one is provided.
+Instead of hardcoding the prompt, the project dynamically adds the system prompt only when provided.
 
-This makes the chat function reusable for different assistant personalities.
+### Temperature
 
-### Temperature Control
+The chatbot supports configurable temperature values.
 
-The chatbot also supports configurable temperature.
-
-```python
-temperature=1.0
-```
-
-Temperature controls the randomness of Claude's responses.
-
-| Temperature | Use Case |
-|-------------|----------|
-| 0.0 – 0.3 | Factual answers, coding, data extraction |
+| Temperature | Typical Use Cases |
+|-------------|-------------------|
+| 0.0 – 0.3 | Factual responses, coding, data extraction |
 | 0.4 – 0.7 | Summarization, education, problem solving |
 | 0.8 – 1.0 | Brainstorming, creative writing, marketing |
 
 ---
 
-## 3️⃣ EventStreaming.py
+## ⚡ EventStreaming.py
 
-Demonstrates how to stream Claude's response in real time.
+Demonstrates Anthropic's streaming API.
 
-Instead of waiting for the entire response, Claude sends the output as small chunks.
+Instead of waiting for the entire response, Claude streams text token-by-token.
 
-Benefits include:
+### Features
 
-- Faster perceived response time
-- Better user experience
-- Real-time text generation
-
-The project also demonstrates:
-
-- Raw streaming events
-- Extracting only the generated text
-- Using `stream.text_stream`
-- Collecting the final message using
+- Real-time response streaming
+- Cleaner streaming using `stream.text_stream`
+- Access to raw streaming events
+- Collecting the final generated response
 
 ```python
-stream.get_final_message()
+answer = stream.get_final_message()
 ```
 
-This can later be stored in a database or conversation history.
+The final message can later be stored in databases or conversation history.
 
 ---
 
-## 🎯 Roadmap
+# 📚 Concepts Learned
 
-This repository will gradually evolve into a fully functional AI agent.
+## Prompt Engineering
+
+- ✅ Being clear and direct
+- ✅ Being specific
+- ⏳ XML prompt structuring
+- ⏳ Few-shot prompting
+- ⏳ Prompt engineering exercises
+
+---
+
+## System Prompts
+
+Implemented dynamic system prompts to control Claude's personality and behavior without changing application logic.
+
+---
+
+## Temperature
+
+Learned how temperature influences response creativity.
+
+- Low Temperature → deterministic
+- Medium Temperature → balanced
+- High Temperature → creative
+
+---
+
+## Event Streaming
+
+Implemented streaming responses to improve user experience and reduce perceived latency.
+
+---
+
+# 📈 Learning Progress
+
+## Prompt Evaluation (Currently Learning)
+
+Learning how to evaluate prompt quality using structured evaluation workflows.
+
+### Evaluation Workflow
+
+1. Draft a prompt
+2. Create an evaluation dataset
+3. Generate responses with Claude
+4. Grade the outputs
+5. Improve the prompt and repeat
+
+This iterative workflow helps improve prompt quality using measurable evaluation criteria.
+
+---
+
+## Evaluation Criteria
+
+Understanding how prompts should be evaluated using:
+
+### Format
+
+- Correct output format
+- No unnecessary explanations
+
+### Valid Syntax
+
+- Valid Python
+- Valid JSON
+- Valid Regular Expressions
+
+### Task Following
+
+- Correctly follows user instructions
+- Produces accurate outputs
+
+---
+
+## Prompt Graders
+
+Learning different grading approaches.
+
+### Code Grader
+
+Used for automatically checking:
+
+- Output length
+- Syntax validation
+- Required keywords
+- Readability
+
+### Model Grader
+
+Uses an LLM to evaluate:
+
+- Response quality
+- Instruction following
+- Completeness
+- Helpfulness
+- Safety
+
+### Human Grader
+
+Manual evaluation of:
+
+- Relevance
+- Conciseness
+- Comprehensiveness
+- Overall response quality
+
+---
+
+# 🔜 Upcoming Topics
+
+The following Anthropic concepts will be implemented in future commits.
+
+## Prompt Engineering
+
+- [ ] XML Prompt Structure
+- [ ] Few-shot Prompting
+- [ ] Prompt Evaluation Framework
+
+## Tool Use
+
+- [ ] Tool Functions
+- [ ] Tool Schemas
+- [ ] Handling Message Blocks
+- [ ] Sending Tool Results
+- [ ] Multi-turn Tool Conversations
+- [ ] Multiple Tool Calling
+- [ ] Fine-Grained Tool Calling
+- [ ] Text Editing Tool
+- [ ] Web Search Tool
+
+---
+
+## Tool Use Workflow
+
+Upcoming implementations will follow Anthropic's Tool Use pattern:
+
+```
+User
+   │
+   ▼
+Our Server ─────────► Claude
+        ▲              │
+        │              ▼
+ Execute Tool ◄──── Tool Request
+        │
+        ▼
+Return Tool Result
+        │
+        ▼
+Claude generates final response
+```
+
+This enables Claude to request external information, execute tools through the application, and generate an augmented final response.
+
+---
+
+# 🎯 Roadmap
 
 ### Completed
 
-- [x] Connect to Claude API
-- [x] Generate a response from a user prompt
-- [x] Maintain conversation history
-- [x] Implement multi-turn conversations
-- [x] Create reusable conversation/session management
-- [x] Add configurable System Prompts
-- [x] Add Temperature parameter
-- [x] Implement response streaming
+- [x] Claude API Integration
+- [x] Secure API Key Management
+- [x] Multi-turn Conversations
+- [x] Conversation History
+- [x] Interactive CLI Chatbot
+- [x] System Prompts
+- [x] Temperature Control
+- [x] Event Streaming
 
-### Upcoming
+### In Progress
 
-- [ ] Improve error handling
-- [ ] Conversation reset command
-- [ ] Persist chat history
-- [ ] Token usage tracking
+- [ ] Prompt Evaluation
+- [ ] Code Graders
+- [ ] Model Graders
+
+### Planned
+
 - [ ] Tool Calling
 - [ ] MCP (Model Context Protocol)
+- [ ] Multiple Tools
+- [ ] Memory Management
 - [ ] Retrieval-Augmented Generation (RAG)
-- [ ] Memory management
-- [ ] Advanced AI agent workflows
+- [ ] Persistent Conversation Storage
+- [ ] Advanced AI Agent Workflows
 
 ---
 
-## 💡 Purpose
+# 💡 Purpose
 
-The goal of this project is not just to build an AI chatbot, but to understand how modern AI agents work internally—from simple API calls to persistent conversations, configurable model behavior, response streaming, tool use, and intelligent workflows.
+The objective of this repository is to learn how modern AI agents are built—from simple API calls to advanced conversational systems with memory, prompt engineering, evaluation workflows, streaming, and external tool integration.
 
 Each commit represents a new learning milestone, making it easy to follow the project's evolution over time.
 
 ---
 
-# 📈 Current Status
+# 📊 Current Status
 
 | Phase | Status |
 |--------|--------|
 | Claude API Integration | ✅ Completed |
-| Multi-Turn Conversation Memory | ✅ Completed |
-| Interactive Chat Interface | ✅ Completed |
+| Multi-turn Conversation Memory | ✅ Completed |
+| Interactive Chatbot | ✅ Completed |
 | System Prompt Engineering | ✅ Completed |
 | Temperature Control | ✅ Completed |
 | Event Streaming | ✅ Completed |
-| Advanced Agent Features | 🔄 In Progress |
+| Prompt Evaluation | 🔄 Learning |
+| Tool Use | ⏳ Upcoming |
+| Advanced Agent Development | 🔄 In Progress |
 
 ---
 
-## 📚 Concepts Learned
-
-During this project, the following Anthropic concepts have been implemented:
-
-- Anthropic Messages API
-- Multi-turn conversations
-- Conversation history
-- System Prompts
-- Temperature parameter
-- Event Streaming
-- Dynamic parameter handling
-- Terminal chatbot development
-
----
-
-> **Current Milestone:** The project now supports **context-aware conversations**, **customizable assistant behavior using system prompts**, **temperature-controlled responses**, and **real-time streaming**, providing a strong foundation for building advanced AI agents with Tool Calling, MCP, and memory systems.
+> **Current Milestone:** The project now supports **context-aware conversations**, **dynamic system prompts**, **temperature-controlled responses**, and **real-time event streaming**. The next phase focuses on **prompt evaluation**, **grading strategies**, and **tool use**, laying the foundation for building production-ready AI agents.
